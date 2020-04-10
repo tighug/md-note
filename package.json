@@ -1,0 +1,9 @@
+{
+  "name": "md-note",
+  "version": "0.1.0",
+  "description": "React Markdown Note",
+  "main": "index.js",
+  "author": "tighug",
+  "license": "MIT",
+  "private": true
+}
