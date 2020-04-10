@@ -5,5 +5,8 @@
   "main": "index.js",
   "author": "tighug",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "electron": "^8.2.1"
+  }
 }
