@@ -12,7 +12,23 @@ module.exports = {
     filename: "index.js",
   },
   module: {
-    rules: [{ test: /\.tsx$/, exclude: /node_modules/, use: "ts-loader" }],
+    rules: [
+      { test: /\.tsx$/, use: "ts-loader" },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
