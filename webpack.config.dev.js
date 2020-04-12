@@ -13,7 +13,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx$/, use: "ts-loader" },
+      { test: /\.tsx$/, exclude: /node_modules/, use: "ts-loader" },
       {
         test: /\.css$/,
         use: [
@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     new HotModuleReplacementPlugin({
-      multiStep: true,
+      multiStep: false,
     }),
 
     new HtmlWebpackPlugin({
