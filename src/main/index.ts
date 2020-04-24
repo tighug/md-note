@@ -2,7 +2,16 @@ const { app, BrowserWindow } = require("electron");
 
 const isDev = process.env.NODE_ENV === "development";
 
-function createWindow() {
+async function installExtensions() {
+  const installer = require("electron-devtools-installer");
+  const extensions = ["REACT_DEVELOPER_TOOLS"];
+
+  return Promise.all(
+    extensions.map((name) => installer.default(installer[name]))
+  ).catch(console.log);
+}
+
+async function createWindow() {
   // ブラウザウインドウを作成
   const win = new BrowserWindow({
     width: 800,
@@ -12,15 +21,13 @@ function createWindow() {
     },
   });
 
-  // そしてこのアプリの index.html をロード
   if (isDev) {
+    await installExtensions();
     win.loadURL("http://localhost:3000/build/index.html");
+    win.webContents.openDevTools();
   } else {
     win.loadFile("../renderer/index.html");
   }
-
-  // 開発者ツールを開く
-  win.webContents.openDevTools();
 }
 
 // このメソッドは、Electron が初期化処理と
