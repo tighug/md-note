@@ -1,6 +1,8 @@
 const path = require("path");
 const { HotModuleReplacementPlugin } = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
 const { spawn } = require("child_process");
 
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx$/, exclude: /node_modules/, use: "ts-loader" },
+      { test: /\.(ts|tsx)$/, exclude: /node_modules/, use: "ts-loader" },
       {
         test: /\.css$/,
         use: [
@@ -41,6 +43,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/renderer/index.html",
     }),
+
+    new CopyPlugin([{ from: "theme/*.css", to: "" }]),
+
+    new WriteFilePlugin(),
   ],
   devServer: {
     compress: true,
