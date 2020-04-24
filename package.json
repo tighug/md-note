@@ -6,6 +6,18 @@
   "author": "tighug",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "yarn build-main && yarn build-renderer",
+    "build-main": "tsc --outDir build/main src/main/index.ts",
+    "build-renderer": "webpack --config webpack.config.prod.js",
+    "dev": "yarn build-main && yarn start-renderer-dev",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "prestart": "yarn build",
+    "start": "cross-env NODE_ENV=production electron build/main/index.js",
+    "start-main-dev": "cross-env NODE_ENV=development electron build/main/index.js",
+    "start-renderer-dev": "webpack-dev-server --config webpack.config.dev.js"
+  },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
