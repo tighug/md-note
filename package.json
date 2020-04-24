@@ -23,11 +23,16 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.49",
     "clsx": "^1.1.0",
+    "codemirror": "^5.52.2",
     "electron": "^8.2.1",
+    "marked": "^0.8.2",
     "react": "^16.13.1",
+    "react-codemirror2": "^7.1.0",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@types/codemirror": "^0.0.91",
+    "@types/marked": "^0.7.3",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
