@@ -1,6 +1,5 @@
 const path = require("path");
 const { HotModuleReplacementPlugin } = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require("write-file-webpack-plugin");
 const { spawn } = require("child_process");
@@ -15,7 +14,16 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(ts|tsx)$/, exclude: /node_modules/, use: "ts-loader" },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      },
       {
         test: /\.css$/,
         use: [
@@ -40,11 +48,10 @@ module.exports = {
       multiStep: false,
     }),
 
-    new HtmlWebpackPlugin({
-      template: "src/renderer/index.html",
-    }),
-
-    new CopyPlugin([{ from: "theme/*.css", to: "" }]),
+    new CopyPlugin([
+      { from: "theme/*.css", to: "" },
+      { from: "src/renderer/index.html", to: "" },
+    ]),
 
     new WriteFilePlugin(),
   ],
