@@ -37,6 +37,7 @@
     "react-redux": "^7.2.0",
     "react-split-pane": "^0.1.91",
     "redux": "^4.0.5",
+    "ress": "^2.0.4",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
