@@ -3,6 +3,7 @@ const { HotModuleReplacementPlugin } = require("webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 const WriteFilePlugin = require("write-file-webpack-plugin");
 const { spawn } = require("child_process");
+const consola = require("consola");
 
 module.exports = {
   target: "electron-renderer",
@@ -42,22 +43,21 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    },
   },
   plugins: [
     new HotModuleReplacementPlugin({
-      multiStep: false,
+      multiStep: true,
     }),
-
     new CopyPlugin([
       { from: "theme/*.css", to: "" },
       { from: "src/renderer/index.html", to: "" },
     ]),
-
     new WriteFilePlugin(),
   ],
   devServer: {
-    compress: true,
-    watchContentBase: true,
     contentBase: path.join(__dirname, "build/renderer"),
     headers: { "Access-Control-Allow-Origin": "*" },
     historyApiFallback: {
@@ -67,15 +67,13 @@ module.exports = {
     hot: true,
     inline: true,
     noInfo: true,
+    quiet: true,
+    overlay: true,
     port: 3000,
     publicPath: "http://localhost:3000/build/",
-    watchOptions: {
-      agreedTimeout: 300,
-      ignored: /node_modules/,
-      poll: 100,
-    },
     before() {
-      console.log("Starting Main Process...");
+      consola.info({ message: "Starting Main Process...", badge: true });
+
       spawn("npm", ["run", "start-main-dev"], {
         shell: true,
         env: process.env,
