@@ -39,7 +39,8 @@
     "react-split-pane": "^0.1.91",
     "redux": "^4.0.5",
     "ress": "^2.0.4",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "typeface-roboto": "^0.0.75"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -86,6 +87,7 @@
     "stylelint-prettier": "^1.1.2",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
+    "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
