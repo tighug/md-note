@@ -4,7 +4,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 async function installExtensions() {
   const installer = require("electron-devtools-installer");
-  const extensions = ["REACT_DEVELOPER_TOOLS"];
+  const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
 
   return Promise.all(
     extensions.map((name) => installer.default(installer[name]))
@@ -23,12 +23,15 @@ async function createWindow() {
 
   if (isDev) {
     await installExtensions();
+    process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "1";
     win.loadURL("http://localhost:3000/build/index.html");
     win.webContents.openDevTools();
   } else {
     win.loadFile("../renderer/index.html");
   }
 }
+
+app.allowRendererProcessReuse = true;
 
 // このメソッドは、Electron が初期化処理と
 // browser window の作成準備が完了した時に呼び出されます。
